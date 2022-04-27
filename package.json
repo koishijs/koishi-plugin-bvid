@@ -1,7 +1,7 @@
 {
   "name": "koishi-plugin-bvid",
   "description": "Detect Bilibili Video Links in Koishi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -32,6 +32,6 @@
     "bvid"
   ],
   "peerDependencies": {
-    "koishi": "^4.4.0"
+    "koishi": "^4.6.1"
   }
 }
