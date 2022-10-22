@@ -1,6 +1,6 @@
 // modified from https://github.com/Coxxs/bvid
 
-import { Context } from 'koishi'
+import { Context, segment } from 'koishi'
 import axios from 'axios'
 
 const table = 'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF'
@@ -45,7 +45,10 @@ export const name = 'bvid'
 export function apply(ctx: Context) {
   async function getInfo(id: number) {
     const data = await ctx.http.get(`http://api.bilibili.com/x/web-interface/view?aid=${id}`)
-    return `bilibili.com/video/av${id}\n${data.data.title}\n[CQ:image,file=${data.data.pic}]`
+    const img = await ctx.http.get<ArrayBuffer>(data.data.pic, {
+      responseType: 'arraybuffer',
+    })
+    return `bilibili.com/video/av${id}\n${data.data.title}\n${segment.image(img)}`
   }
 
   ctx.middleware(async (session, next) => {
